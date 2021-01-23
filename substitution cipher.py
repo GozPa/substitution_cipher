@@ -34,7 +34,7 @@ def change(text):
 #------------------------------------------------------------------------------------------------------------------
 
 # Removing numbers from text 
-def numbers(text):
+def numbers_without(text):
     list_numbers=[]
     for i in range(48,58):
         list_numbers.append(chr(i))                        
@@ -48,7 +48,7 @@ def numbers(text):
 
 #------------------------------------------------------------------------------------------------------------------
 # Convert capital letters to lowercase
-def lower(text):
+def lower_text(text):
     text = text.lower()
     return text
 
@@ -96,14 +96,43 @@ def save(text,k):
 def preparation():
     plain=loading()
     text_changed=change(plain)
-    text_without_numbers=numbers(text_changed)
-    text_with_low_characters = lower(text_without_numbers)   
+    text_without_numbers=numbers_without(text_changed)
+    text_with_low_characters = lower_text(text_without_numbers)   
     text_without_polish_characters = change_polish_characters(text_with_low_characters)
     text_divided = division(text_without_polish_characters)
     #save(text_divided)
     return text_divided
 
 #text_redy_to_encryption = preparation()
+
+#-----------------------------------------------------------------------------------------------------------------
+#Key checking function
+def key_check():
+     temp=0 
+     while temp != 1:
+         key = loading()
+         key_without_special_characters = change(key)
+         key_without_polish_characters = change_polish_characters(key_without_special_characters)
+         key_without_numbers = numbers_without(key_without_polish_characters)
+         key=key_without_numbers.upper()
+         #print(key)
+         if len(key) == 26:            
+             key=list(key)
+             key_check_list=[]
+             #print(key)
+             for i in range(0,26):
+                 if key[i] not in key_check_list:
+                     key_check_list.append(key[i])
+             #print(key_check_list)
+             if len(key_check_list)== 26:
+                 temp = 1            
+             else:
+                  print("Incorect length key")
+                  print("Try again, but remember key must have 26 different letters from a to z.")                  
+         else:
+            print("Incorect length key")
+            print("Try again, but remember length key must be 26.")                
+     return key
 
 """
 - Loading kye from file (".txt")
@@ -137,27 +166,18 @@ def substitution_cipher():
         print("Your choose is encryption.")
         cipher = []
         print("\n \n    You will be asked for a key file")
-        temp=0 
-        while temp != 1:
-            key = loading()
-            if len(key) == 26:
-                temp = 1
-            else:
-                print("Incorect length key")
-                print("Try again, but remeber lenght key must be 26.")
-                key = loading()
-        key=key.upper()
+        key=key_check()
         print("\n \n    You will be asked for a plain text file.")
         text = preparation()
         #tekst = wczytywanie()
         #klucz = "DEFGHIJKLMNOPQRSTUVWXYZABC"
         alphabet = [chr(i) for i in range(97,123)]
-        key = list(key)
         dictionary= dict(zip(alphabet, key))
             
         for j in text:
             if j != chr(10): # for "Enter"
                 if j != chr(32): # for "Space"
+                    print(j)
                     cipher.append(dictionary[j])    
                 else:
                     cipher.append(' ')
@@ -174,21 +194,11 @@ def substitution_cipher():
         print("Your choose is decryption.")
         plain_text=[]        
         print("\n \n    You will be asked for a key file")
-        temp=0 
-        while temp != 1:
-            key = loading()
-            if len(key) == 26:
-                temp=1
-            else:
-                print("Incorect length key")
-                print("Try again, but remeber lenght key must be 26.")
-                key = loading()
-        key=key.upper()
+        key=key_check()
         print("\n \n    You will be asked for a cipher text file.")
         text = preparation()
         text = text.upper()
         alphabet = [chr(i) for i in range(97,123)]
-        key = list(key)
         dictionary = dict(zip(key, alphabet))        
         
         for j in text:
