@@ -1,57 +1,56 @@
 Dzia³anie programu :
-Program wczytuje podany przez u¿ytkownika plik tekstowy oraz klucz, a nastêpnie szufruje lub odszyfrowuje tekst z pliku za pomoc¹ szyfru podstawieniowego, a wynik zapisuje do wybranego przez u¿ytkownika pliku.
+Program wczytuje podany przez u¿ytkownika plik tekstowy oraz klucz, a nastêpnie szufruje lub odszyfrowuje tekst z pliku za pomoc¹ 
+szyfru podstawieniowego, a wynik zapisuje do wybranego przez u¿ytkownika pliku.
 
 Instrukcja dla u¿ytkownika:
-Po uruchomieniu programu u¿ytkownik musi wybraæ jedn¹ z opcji (szyfrowanie, odszyfrowywanie). Nastêpnie program prosi o podanie nazwy pliku z kluczem (z rozszerzeniem), a nastêpnie o nazwê pliku z tekstem (jawnym/szyfrem).
-W nastêpnym kroku zaszyfruje/ odszyfruje podany mu tekst. Na koniec poprosi o podanie nazwy pod jak¹ chcemy zapisaæ uzyskany tekst w folderze. Na tym program koñczy swoje dzia³anie.
+Po uruchomieniu programu u¿ytkownik musi wybraæ jedn¹ z opcji (Encryption, Decryption). Nastêpnie program prosi o podanie nazwy 
+pliku z kluczem (z rozszerzeniem), a nastêpnie o nazwê pliku z tekstem (jawnym/szyfrem).W nastêpnym kroku zaszyfruje/ odszyfruje 
+podany mu tekst. Na koniec poprosi o podanie nazwy pod jak¹ chcemy zapisaæ uzyskany tekst w folderze. Na tym program koñczy swoje 
+dzia³anie.
 
 U¿yte funkcje:
-1) funkcja wczytywanie
-2) funkcja zmiana
-3) funkcja cyfry
-4) funkcja lower
-5) funkcja polskie_znaki_1
-6) funkcja dzielenie
-7) funkcja zapisywanie
-8) funckja Przygotowanie
-9) funkcja Podstawieniowy
+1) funkcja loading()
+2) funkcja change()
+3) funkcja numbers_without()
+4) funkcja lower_text()
+5) funkcja change_polish_characters()
+6) funkcja division()
+7) funkcja save()
+8) funckja preparation()
+9) funkcja key_check()
+10) funkcja substitution_cipher()
 
+preparation() - funkcja przygotuje  plik tekstowy do szyfrowania, czyli wywo³oje funkcje loading(), nastêpnie na wczytanym tekscie 
 
-Funkcja Przygotowanie - tak zwany main, po uruchomieniu programu wywo³a poni¿sze funkcje, czyli 
-przygotuje  plik tekstowy do szyfrowania.
-
-Funkcja wczytywanie - wyœwietla instrukcjê dla u¿ytkownika "Podaj nazwe pliku z rozszerzeniem", 
-po podaniu odpowiedniej nazwy z rozszerzeniem wczytuje plik i przypisuje go do zmiennej "plain".
+loading() - funkcja wyœwietla instrukcjê dla u¿ytkownika "Podaj nazwe pliku z rozszerzeniem", 
+po podaniu odpowiedniej nazwy z rozszerzeniem wczytuje plik i przypisuje go do zmiennej "file".
 Je¿eli zostanie Ÿle podana nazwa pliku lub bez rozszerzenia lub dany plik nie istnieje,
 wówczas otrzymamy komunikat "Podany plik nie istnieje" i program poprosi o ponowne podanie nazwy 
 wraz z rozszerzeniem.
 
-Funkcja zmiana - usuwa z tekstu wszystkie znaki bia³e i interpunkcyjne takie jak spacje, przecinki, 
-œredniki, nawiasy itp.. Wyœwietla zmieniony tekst w oknie konsoli oraz przypisuje
-do zmiennej "tekst_zmieniony".
+change(text) - funkcja usuwa z tekstu wszystkie znaki bia³e i interpunkcyjne takie jak spacje, przecinki, 
+œredniki, nawiasy itp..
 
-Funkcja cyfry - usuwa z tekstu wszystkie cyfry oraz przypisuje do zmiennej "tekst_bez_cyfr".
+numbers_without(text) - funkcja usuwa z tekstu wszystkie cyfry.
 
-Funkcja lower - zamienia wszystkie litery z podanego tekstu na ma³e oraz przypisuje zmieniony tekst 
-do zmiennej "tekst_low".
+lower_text(text) - funkcja zamienia wszystkie litery z podanego tekstu na ma³e.
 
-Funkcja polskie_znaki_1 - zamienia znaki diakrytyczne z ró¿nych jêzyków na litery alfabetu ³aciñskiego, 
-zmodyfikowany tekst przypisuje do zmiennej "bez_polskich_znakow"
+change_polish_characters(input_text) - funckja zamienia znaki diakrytyczne z ró¿nych jêzyków na litery alfabetu ³aciñskiego.
 
-Funkcja dzielenie - dzieli podany tekst na 7 kolumn po 5 znaków poprzez dodanie spacji lub przejœcia do 
-nowej linii w odpowiednim miejscu, nastêpnie przypisuje go do zmiennej "tekst_podzielony". 
+division(text) - funkcja dzieli podany tekst na 7 kolumn po 5 znaków poprzez dodanie spacji lub przejœcia do 
+nowej linii w odpowiednim miejscu. 
 
-Funkcja zapisywanie - tworzy nowy plik .txt i zapisuje do niego tekst po wykonaniu wszystkich zmian, prosi 
+save(text,k) - funkcja tworzy nowy plik .txt i zapisuje do niego tekst po wykonaniu wszystkich zmian, prosi 
 u¿ytkownika o podanie nazwy (bez rozszerzenia) pod jak¹ chce zapisaæ zmieniony tekst.
 
+key_check() - funkcja wczytuje za pomoc¹ funkcji loading() klucz nastêpnie usuwa wszystkie znaki specjalne i cyfry. 
+Nastêpnie sprawdza d³ugoœæ klucza, musi byæ równa 26. Je¿eli wczytywany klucz nie spe³nia wymagañ, funkcja wyœwietla 
+powiadomienie i prosi o podanie nowego pliku.
 
-Funkcja Podstawieniowy - wyœwietla menu zawieraj¹ce dwie opcje do wyboru: 1. Szyfrowanie oraz 2. odszyfrowanie.
+substitution_cipher() - wyœwietla menu zawieraj¹ce dwie opcje do wyboru: 1. Encryption oraz 2. Decryption.
 U¿ytkownik wybiera cyfrê 1 lub 2. 
-Jeœli wybrano opcjê 1-szyfrowanie program prosi u¿ytkownika o podanie klucza, wyœwietlaj¹c komunikat "Podaj nazwe 
-pliku z rozszerzeniem", po wczytaniu klucza sprawdza czy jego d³ugoœæ jest poprawna tzn. równa 26, jeœli nie jest
-u¿ytkownik dostaje komunikat "Niepoprawna d³ugosc klucza" i musi podaæ poprawiony plik.
-Nastêpnie prosi o podanie tekstu, który ma byæ zaszyfrowany poprzez 
-komunikat "Podaj nazwe pliku z rozszerzeniem". Tekst ten jest przygotowywany do szyfrowania (podzielony na kolumny, 
+Jeœli wybrano opcjê 1-Encryption program odpala funkcje key_check(), nastêpnie prosi o podanie tekstu, który ma byæ zaszyfrowany poprzez 
+funkcje preparation(). Tekst ten jest przygotowywany do szyfrowania (podzielony na kolumny, 
 bez znaków interpunkcyjnych i diakrytycznych). Kolejno tworzy listê "alfabet" u¿ywaj¹c kodu ASCII. Program ³¹czy 
 dwie listy (alfabet, klucz) i zamienia na s³ownik. Nastêpnie ka¿dy znak w tekœcie zamienia 
 wed³ug klucza i dodaje do listy "szyfr". Jeœli funkcja natrafi na spacjê lub enter dodaje je do szyfrogramu.
