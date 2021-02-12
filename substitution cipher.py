@@ -214,7 +214,7 @@ def substitution_cipher():
         save(plain_text,'plain')    
         print("A file was decription and save")
 
-
+#Main
 substitution_cipher()
 
 

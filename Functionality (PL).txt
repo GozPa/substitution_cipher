@@ -4,9 +4,13 @@ szyfru podstawieniowego, a wynik zapisuje do wybranego przez u¿ytkownika pliku.
 
 Instrukcja dla u¿ytkownika:
 Po uruchomieniu programu u¿ytkownik musi wybraæ jedn¹ z opcji (Encryption, Decryption). Nastêpnie program prosi o podanie nazwy 
-pliku z kluczem (z rozszerzeniem), a nastêpnie o nazwê pliku z tekstem (jawnym/szyfrem).W nastêpnym kroku zaszyfruje/ odszyfruje 
+pliku z kluczem (z rozszerzeniem), a nastêpnie o nazwê pliku z tekstem (jawnym/szyfrem). W nastêpnym kroku zaszyfruje/ odszyfruje 
 podany mu tekst. Na koniec poprosi o podanie nazwy pod jak¹ chcemy zapisaæ uzyskany tekst w folderze. Na tym program koñczy swoje 
 dzia³anie.
+
+W³aœnoœci programu:
+1-Program przyjmuje jako dane wejœciowe pliki tekstowe kodowane utf-8, poniewa¿ dzia³a na kodzie ASCII.
+2-Za³o¿eniem szyfrowania i odszyfrowywania, w tym programie, jest klucz sk³adaj¹cy siê dok³adnie z 26 ró¿nych liter.
 
 U¿yte funkcje:
 1) funkcja loading()
@@ -20,47 +24,51 @@ U¿yte funkcje:
 9) funkcja key_check()
 10) funkcja substitution_cipher()
 
-preparation() - funkcja przygotuje  plik tekstowy do szyfrowania, czyli wywo³oje funkcje loading(), nastêpnie na wczytanym tekscie 
 
-loading() - funkcja wyœwietla instrukcjê dla u¿ytkownika "Podaj nazwe pliku z rozszerzeniem", 
+Ad 1) loading() - funkcja wyœwietla instrukcjê dla u¿ytkownika "Podaj nazwe pliku z rozszerzeniem", 
 po podaniu odpowiedniej nazwy z rozszerzeniem wczytuje plik i przypisuje go do zmiennej "file".
 Je¿eli zostanie Ÿle podana nazwa pliku lub bez rozszerzenia lub dany plik nie istnieje,
 wówczas otrzymamy komunikat "Podany plik nie istnieje" i program poprosi o ponowne podanie nazwy 
 wraz z rozszerzeniem.
 
-change(text) - funkcja usuwa z tekstu wszystkie znaki bia³e i interpunkcyjne takie jak spacje, przecinki, 
+Ad 2) change(text) - funkcja usuwa z tekstu wszystkie znaki bia³e i interpunkcyjne takie jak spacje, przecinki, 
 œredniki, nawiasy itp..
 
-numbers_without(text) - funkcja usuwa z tekstu wszystkie cyfry.
+Ad 3) numbers_without(text) - funkcja usuwa z tekstu wszystkie cyfry.
 
-lower_text(text) - funkcja zamienia wszystkie litery z podanego tekstu na ma³e.
+Ad 4) lower_text(text) - funkcja zamienia wszystkie litery z podanego tekstu na ma³e.
 
-change_polish_characters(input_text) - funckja zamienia znaki diakrytyczne z ró¿nych jêzyków na litery alfabetu ³aciñskiego.
+Ad 5) change_polish_characters(input_text) - funckja zamienia znaki diakrytyczne z ró¿nych jêzyków na litery alfabetu ³aciñskiego.
 
-division(text) - funkcja dzieli podany tekst na 7 kolumn po 5 znaków poprzez dodanie spacji lub przejœcia do 
+Ad 6) division(text) - funkcja dzieli podany tekst na 7 kolumn po 5 znaków poprzez dodanie spacji lub przejœcia do 
 nowej linii w odpowiednim miejscu. 
 
-save(text,k) - funkcja tworzy nowy plik .txt i zapisuje do niego tekst po wykonaniu wszystkich zmian, prosi 
+Ad 7) save(text,k) - funkcja tworzy nowy plik .txt i zapisuje do niego tekst po wykonaniu wszystkich zmian, prosi 
 u¿ytkownika o podanie nazwy (bez rozszerzenia) pod jak¹ chce zapisaæ zmieniony tekst.
 
-key_check() - funkcja wczytuje za pomoc¹ funkcji loading() klucz nastêpnie usuwa wszystkie znaki specjalne i cyfry. 
-Nastêpnie sprawdza d³ugoœæ klucza, musi byæ równa 26. Je¿eli wczytywany klucz nie spe³nia wymagañ, funkcja wyœwietla 
+Ad 8) preparation() - funkcja przygotuje  plik tekstowy do szyfrowania, czyli wywo³oje funkcje loading(), nastêpnie na wczytanym tekscie 
+wywo³uje funkcje: change(), numbers_without(), lower_text(), change_polish_characters() i division().
+
+Ad 9) key_check() - funkcja wczytuje za pomoc¹ funkcji loading() klucz nastêpnie usuwa wszystkie znaki specjalne i cyfry. 
+Nastêpnie sprawdza d³ugoœæ klucza, musi zawieraæ 26 ró¿nych liter. Je¿eli wczytywany klucz nie spe³nia wymagañ, funkcja wyœwietla 
 powiadomienie i prosi o podanie nowego pliku.
 
-substitution_cipher() - wyœwietla menu zawieraj¹ce dwie opcje do wyboru: 1. Encryption oraz 2. Decryption.
+Ad 10) substitution_cipher() - wyœwietla menu zawieraj¹ce dwie opcje do wyboru: 1. Encryption oraz 2. Decryption.
 U¿ytkownik wybiera cyfrê 1 lub 2. 
-Jeœli wybrano opcjê 1-Encryption program odpala funkcje key_check(), nastêpnie prosi o podanie tekstu, który ma byæ zaszyfrowany poprzez 
-funkcje preparation(). Tekst ten jest przygotowywany do szyfrowania (podzielony na kolumny, 
-bez znaków interpunkcyjnych i diakrytycznych). Kolejno tworzy listê "alfabet" u¿ywaj¹c kodu ASCII. Program ³¹czy 
-dwie listy (alfabet, klucz) i zamienia na s³ownik. Nastêpnie ka¿dy znak w tekœcie zamienia 
-wed³ug klucza i dodaje do listy "szyfr". Jeœli funkcja natrafi na spacjê lub enter dodaje je do szyfrogramu.
 
-W przypadku wybrania drugiej opcji czyli odszyfrowania program prosi u¿ytkownika o podanie klucza, wyœwietlaj¹c 
-komunikat "Podaj nazwe pliku z rozszerzeniem". Tak jak wy¿ej sprawdza czy d³ugoœæ klucza jest poprawna, jeœli nie 
-trzeba podaæ plik ponownie. Nastêpnie prosi o podanie tekstu, który ma byæ odszyfrowany poprzez 
-komunikat "Podaj nazwe pliku z rozszerzeniem". Kolejno tworzy listê "alfabet" u¿ywaj¹c kodu ASCII. Program ³¹czy 
+1. Jeœli wybrano opcjê 1-Encryption program odpala funkcje key_check(), nastêpnie prosi o podanie tekstu, który ma byæ zaszyfrowany 
+poprzez funkcje preparation(). Tekst ten jest przygotowywany do szyfrowania (podzielony na kolumny, 
+bez znaków interpunkcyjnych i diakrytycznych). Kolejno tworzy listê "alphabet" u¿ywaj¹c kodu ASCII. Program ³¹czy 
+dwie listy (alfabet, klucz) i zamienia na s³ownik. Nastêpnie ka¿dy znak w tekœcie zamienia 
+wed³ug klucza i dodaje do listy "cipher", jeœli funkcja natrafi na spacjê lub enter dodaje je do szyfrogramu. Na koniec zapisuje 
+cipher do pliku tekstowego (".txt") pod nazw¹ podan¹ przez u¿ytkownika.  
+
+2. W przypadku wybrania drugiej opcji ( 2-Decryption)  program rozpoczyna od wywo³ania funkcji key_check(), nastêpnie prosi o 
+podanie tekstu, który ma byæ odszyfrowany poprzez funkcje preparation(). W kolejnym etapie u¿ywa funkcji upper() na wczytanym 
+szyfrogramie. Kolejno tworzy listê "alphabet" u¿ywaj¹c kodu ASCII. Program ³¹czy 
 dwie listy (klucz, alfabet) i zamienia na s³ownik. Nastêpnie ka¿dy znak w tekœcie zamienia wed³ug klucza i dodaje 
-do listy "odszyfrowanie". Jeœli funkcja natrafi na spacjê lub enter dodaje je do tekstu.
+do listy "plain", jeœli funkcja natrafi na spacjê lub enter dodaje je do tekstu. Na koniec zapisuje 
+plain do pliku tekstowego (".txt") pod nazw¹ podan¹ przez u¿ytkownika.
 
 
 
